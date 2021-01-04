@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 using PFSS.API.Controllers;
+using PFSS.Models;
 using PFSS.Services.Wrapper;
 using System;
 using System.Collections.Generic;
@@ -19,14 +22,10 @@ namespace PrivateFileStorageService.Controllers
 
         }
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult<IList<PFSS.Models.File>> Get()
         {
-            return Ok("Ok");
-        }
-        [HttpGet("{id}")]
-        public ActionResult Get(string id)
-        {
-            return Ok();
+            var files = serviceWrapper.File.Get(x => x.User.Id == PFSUser.Id);
+            return Ok(files);
         }
         [HttpPost]
         public async Task<ActionResult> Upload(List<IFormFile> files)

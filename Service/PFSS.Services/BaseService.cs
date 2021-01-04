@@ -5,6 +5,7 @@ using PFSS.Models;
 using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
+using System.Linq.Expressions;
 
 namespace PFSS.Services
 {
@@ -31,9 +32,9 @@ namespace PFSS.Services
         {
             return collection.Find(x => x.Id == id).SingleOrDefault();
         }
-        public virtual IList<T> Get(FilterDefinition<T> filter)
+        public virtual IList<T> Get(Expression<Func<T, bool>> expression)
         {
-            return collection.Find(filter).ToList();
+            return collection.Find(expression).ToList();
         }
         public virtual void Update(T entity)
         {
