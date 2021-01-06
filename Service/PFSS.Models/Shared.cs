@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PFSS.Models
 {
-    public class Shared
+    public abstract class Shared
     {
         [BsonId]
         public string BsonId { get; set; }

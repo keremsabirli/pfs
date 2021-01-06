@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace PFSS.API.Controllers
 {
     [ApiController]
-    public class BaseController : ControllerBase
+    public class PFSController : ControllerBase
     {
         protected User PFSUser { get; set; }
         public readonly ServiceWrapper serviceWrapper;
-        public BaseController(ServiceWrapper serviceWrapper)
+        public PFSController(ServiceWrapper serviceWrapper)
         {
             this.serviceWrapper = serviceWrapper;
         }
