@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PFSS.API.RequestModels.Directory;
+using PFSS.Models;
 using PFSS.Services.Wrapper;
 using System;
 using System.Collections.Generic;
@@ -13,15 +15,16 @@ namespace PFSS.API.Controllers
     [ApiController]
     public class DirectoryController : PFSController
     {
-        public DirectoryController(ServiceWrapper serviceWrapper) : base(serviceWrapper)
+        public DirectoryController(ServiceWrapper serviceWrapper, IMapper mapper) : base(serviceWrapper, mapper)
         {
 
         }
         [HttpPost]
         public async Task<ActionResult> CreateDirectory(CreateDirectoryRequestModel model)
         {
-            //var directory = 
-            //serviceWrapper.Directory.Add()
+            var directory = mapper.Map<Models.Directory>(model);
+            directory.UserId = PFSUser.Id;
+            serviceWrapper.Directory.Add(directory);
             return Ok();
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PFSS.Models;
 using PFSS.Services.Wrapper;
@@ -13,8 +14,9 @@ namespace PFSS.API.Controllers
     public class PFSController : ControllerBase
     {
         protected User PFSUser { get; set; }
-        public readonly ServiceWrapper serviceWrapper;
-        public PFSController(ServiceWrapper serviceWrapper)
+        protected readonly ServiceWrapper serviceWrapper;
+        protected readonly IMapper mapper;
+        public PFSController(ServiceWrapper serviceWrapper, IMapper mapper)
         {
             this.serviceWrapper = serviceWrapper;
         }

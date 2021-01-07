@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -17,7 +18,7 @@ namespace PrivateFileStorageService.Controllers
     [ApiController]
     public class FileController : PFSController
     {
-        public FileController(ServiceWrapper serviceWrapper): base(serviceWrapper)
+        public FileController(ServiceWrapper serviceWrapper, IMapper mapper): base(serviceWrapper, mapper)
         {
 
         }
