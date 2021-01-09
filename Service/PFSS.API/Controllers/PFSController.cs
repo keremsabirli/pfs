@@ -14,6 +14,7 @@ namespace PFSS.API.Controllers
     public class PFSController : ControllerBase
     {
         protected User PFSUser { get; set; }
+        protected List<UserGroup> UserGroups { get; set; }
         protected readonly ServiceWrapper serviceWrapper;
         protected readonly IMapper mapper;
         public PFSController(ServiceWrapper serviceWrapper, IMapper mapper)

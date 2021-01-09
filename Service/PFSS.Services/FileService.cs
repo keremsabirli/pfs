@@ -24,9 +24,9 @@ namespace PFSS.Services
                 ReadPreference = ReadPreference.Secondary
             });
         }
-        public override Models.File Get(string id)
+        public async override Task<Models.File> GetById(string id)
         {
-            return base.Get(id);
+            return await base.GetById(id);
         }
         public async Task<bool> Upload(IFormFile formFile)
         {
@@ -38,7 +38,7 @@ namespace PFSS.Services
                 Extension = formFile.ContentType,
                 PhysicalFileId = physicalFileId.ToString()
             };
-            Add(file);
+            await Add(file);
             return true;
         }
         

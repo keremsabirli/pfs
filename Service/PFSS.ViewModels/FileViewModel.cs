@@ -4,17 +4,9 @@ using System.Text;
 
 namespace PFSS.ViewModels
 {
-    public class LiteFileViewModel : BaseViewModel
+    public class FileViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string Extension { get; set; }
-    }
-    public class FileViewModel : LiteFileViewModel
-    {
-        
-    }
-    public class DetailedViewModel : FileViewModel
-    {
-
     }
 }

@@ -25,7 +25,7 @@ namespace PrivateFileStorageService.Controllers
         [HttpGet]
         public ActionResult<IList<PFSS.Models.File>> Get()
         {
-            var files = serviceWrapper.File.Get(x => x.User.Id == PFSUser.Id);
+            var files = serviceWrapper.File.GetByCondition(x => x.User.Id == PFSUser.Id);
             return Ok(files);
         }
         [HttpPost]

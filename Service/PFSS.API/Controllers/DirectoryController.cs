@@ -19,12 +19,18 @@ namespace PFSS.API.Controllers
         {
 
         }
+        [HttpGet]
+        public async Task<ActionResult> GetDirectoryChilds(GetDirectoryChildsRequestModel model)
+        {
+            var directoryChilds = await serviceWrapper.Directory.GetByCondition(x => x.Id == model.ParentDirectoryId);
+            return Ok(directoryChilds);
+        }
         [HttpPost]
         public async Task<ActionResult> CreateDirectory(CreateDirectoryRequestModel model)
         {
             var directory = mapper.Map<Models.Directory>(model);
             directory.UserId = PFSUser.Id;
-            serviceWrapper.Directory.Add(directory);
+            await serviceWrapper.Directory.Add(directory);
             return Ok();
         }
     }

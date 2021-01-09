@@ -20,9 +20,7 @@ namespace PFSS.API.Config
         }
         public void MapViewModels()
         {
-            CreateMap<Models.Directory, LiteDirectoryViewModel>().IncludeAllDerived();
-            CreateMap<Models.Directory, DirectoryViewModel>().IncludeAllDerived();
-            CreateMap<Models.Directory, DetailedDirectoryViewModel>();
+            CreateMap<Models.Directory, DirectoryViewModel>();
         }
     }
 }
