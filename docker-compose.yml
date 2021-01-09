@@ -1,20 +1,20 @@
 version: '3'
 services:
-    nginx:
-        image: nginx-frontend
+    pfs-ui:
+        image: pfs-ui
         build: 
-          context: .
-        volumes:
-          - /home/kerem/nginx/data:/usr/share/nginx/html
+          context: ./UI/
         ports:
             - 80:80
         networks: 
             - mynetwork
-    firstapp:
-        image: kerembilim/first-app
+    pfs-api:
+        image: pfs-api
+        build: 
+          context: ./Service/
         ports:
-            - 3000:3000
-        networks:
+            - 3000:80
+        networks: 
             - mynetwork
     mongo:
         image: mongo
@@ -25,12 +25,6 @@ services:
             - ./mongo:/data/db
         ports:
             - 27017:27017
-        networks:
-            - mynetwork
-    secondapp:
-        image: kerembilim/second-app
-        ports:
-            - 4000:4000
         networks:
             - mynetwork
 networks: 
