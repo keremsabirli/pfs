@@ -10,7 +10,6 @@ namespace PFSS.Models
         public List<File> ChildFiles { get; set; }
         public List<Directory> ChildDirectories { get; set; }
         public Directory ParentDirectory { get; set; }
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public List<User> UserGroups { get; set; }
     }
 }
