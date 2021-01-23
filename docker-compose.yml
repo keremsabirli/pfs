@@ -1,0 +1,31 @@
+version: '3'
+services:
+    pfs-ui:
+        image: pfs-ui
+        build: 
+          context: ./UI/
+        ports:
+            - 80:80
+        networks: 
+            - mynetwork
+    pfs-api:
+        image: pfs-api
+        build: 
+          context: ./Service/
+        ports:
+            - 3000:80
+        networks: 
+            - mynetwork
+    mongo:
+        image: mongo
+        environment: 
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=root123
+        volumes:
+            - ./mongo:/data/db
+        ports:
+            - 27017:27017
+        networks:
+            - mynetwork
+networks: 
+    mynetwork:
