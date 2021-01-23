@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using PFSS.API.Config;
 using PFSS.Services.Wrapper;
 
 namespace PrivateFileStorageService
@@ -30,6 +31,12 @@ namespace PrivateFileStorageService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PrivateFileStorageService", Version = "v1" });
             });
+            var mapperConfig = new MapperConfiguration(config =>
+            {
+                config.AddProfile(new MapperConfig());
+            });
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddAutoMapper(typeof(Startup));
         }
 

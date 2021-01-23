@@ -9,7 +9,10 @@ using PFSS.Models;
 using PFSS.Services.Wrapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace PrivateFileStorageService.Controllers
@@ -22,11 +25,12 @@ namespace PrivateFileStorageService.Controllers
         {
 
         }
-        [HttpGet]
-        public ActionResult<IList<PFSS.Models.File>> Get()
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get(string id)
         {
-            var files = serviceWrapper.File.GetByCondition(x => x.User.Id == PFSUser.Id);
-            return Ok(files);
+            var file = await serviceWrapper.File.GetById(id);
+            var fileStream = await serviceWrapper.File.GetPhysicalFile(file.PhysicalFileId);
+            return Ok(fileStream);
         }
         [HttpPost]
         public async Task<ActionResult> Upload(List<IFormFile> files)
