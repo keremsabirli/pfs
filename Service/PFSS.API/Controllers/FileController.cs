@@ -1,32 +1,36 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 using PFSS.API.Controllers;
+using PFSS.Models;
 using PFSS.Services.Wrapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace PrivateFileStorageService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FileController : BaseController
+    public class FileController : PFSController
     {
-        public FileController(ServiceWrapper serviceWrapper): base(serviceWrapper)
+        public FileController(ServiceWrapper serviceWrapper, IMapper mapper): base(serviceWrapper, mapper)
         {
 
         }
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return Ok("Ok");
-        }
         [HttpGet("{id}")]
-        public ActionResult Get(string id)
+        public async Task<ActionResult> Get(string id)
         {
-            return Ok();
+            var file = await serviceWrapper.File.GetById(id);
+            var fileStream = await serviceWrapper.File.GetPhysicalFile(file.PhysicalFileId);
+            return Ok(fileStream);
         }
         [HttpPost]
         public async Task<ActionResult> Upload(List<IFormFile> files)

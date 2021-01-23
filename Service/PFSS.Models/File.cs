@@ -9,5 +9,7 @@ namespace PFSS.Models
         public string Name { get; set; }
         public string Extension { get; set; }
         public string PhysicalFileId { get; set; }
+        public Directory ParentDirectory { get; set; }
+        public User User { get; set; }
     }
 }

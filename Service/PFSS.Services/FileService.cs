@@ -6,6 +6,7 @@ using PrivateFileStorageService;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,9 +25,15 @@ namespace PFSS.Services
                 ReadPreference = ReadPreference.Secondary
             });
         }
-        public override Models.File Get(string id)
+        public async override Task<Models.File> GetById(string id)
         {
-            return base.Get(id);
+            return await base.GetById(id);
+        }
+        public async Task<GridFSDownloadStream> GetPhysicalFile(string id)
+        {
+            var objectId = ObjectId.Parse(id);
+            var stream = await Bucket.OpenDownloadStreamAsync(objectId);
+            return stream;
         }
         public async Task<bool> Upload(IFormFile formFile)
         {
@@ -38,7 +45,7 @@ namespace PFSS.Services
                 Extension = formFile.ContentType,
                 PhysicalFileId = physicalFileId.ToString()
             };
-            Add(file);
+            await Add(file);
             return true;
         }
         

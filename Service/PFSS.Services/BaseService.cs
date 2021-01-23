@@ -5,6 +5,8 @@ using PFSS.Models;
 using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace PFSS.Services
 {
@@ -18,34 +20,34 @@ namespace PFSS.Services
             database = client.GetDatabase(settings.DatabaseName);
             collection = database.GetCollection<T>(typeof(T).Name);
         }
-        public virtual T Add(T entity)
+        public async virtual Task<T> Add(T entity)
         {
-            collection.InsertOne(entity);
+            await collection.InsertOneAsync(entity);
             return entity;
         }
-        public virtual IList<T> Get()
+        public async virtual Task<IList<T>> GetAll()
         {
-            return collection.Find(x => true).ToList();
+            return await collection.FindAsync(x => true).Result.ToListAsync();
         }
-        public virtual T Get(string id)
+        public async virtual Task<T> GetById(string id)
         {
-            return collection.Find(x => x.Id == id).SingleOrDefault();
+            return await collection.FindAsync(x => x.Id == id).Result.SingleOrDefaultAsync();
         }
-        public virtual IList<T> Get(FilterDefinition<T> filter)
+        public async virtual Task<IList<T>> GetByCondition(Expression<Func<T, bool>> expression)
         {
-            return collection.Find(filter).ToList();
+            return await collection.FindAsync(expression).Result.ToListAsync();
         }
-        public virtual void Update(T entity)
+        public async virtual Task Update(T entity)
         {
-            collection.ReplaceOne(x => x.Id == entity.Id, entity);
+            await collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
-        public virtual void UpdateAndGet(T entity)
+        public async virtual Task UpdateAndGet(T entity)
         {
-            collection.FindOneAndReplace(x => x.Id == entity.Id, entity);
+            await collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
         }
-        public virtual void Delete(string id)
+        public async virtual Task Delete(string id)
         {
-            collection.DeleteOne(sub => sub.Id == id);
+            await collection.DeleteOneAsync(sub => sub.Id == id);
         }
     }
 }
