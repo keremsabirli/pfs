@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -44,8 +45,16 @@ namespace PFSS.API.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult test()
+        public async Task<ActionResult> test()
         {
+            User userBilgileri;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
+            {
+                var users = await this.serviceWrapper.User.GetByCondition(a => a.Id == userId);
+                userBilgileri = users.FirstOrDefault();
+                return Ok(userBilgileri);
+            }
             return Ok(new { test = "Kayıt Başarılı" });
         }
 
