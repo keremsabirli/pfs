@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -38,7 +40,7 @@ namespace PrivateFileStorageService
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo {
                     Title = "PrivateFileStorageService",
-                    Version = "v1"
+                    Version = "v1",   
                 });
 
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -66,6 +68,8 @@ namespace PrivateFileStorageService
 
                     }
                 });
+
+                swagger.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "PFSS.API.xml"));
 
             });
             var mapperConfig = new MapperConfiguration(config =>

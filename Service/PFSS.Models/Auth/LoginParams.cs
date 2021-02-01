@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PFSS.Models
+namespace PFSS.Models.Auth
 {
     public class LoginParams
     {
