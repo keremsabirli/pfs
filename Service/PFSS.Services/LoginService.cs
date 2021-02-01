@@ -8,6 +8,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using PFSS.Models.Auth;
 
 namespace PFSS.Services
 {
@@ -49,8 +50,14 @@ namespace PFSS.Services
                    );
             user.token = new JwtSecurityTokenHandler().WriteToken(token);
 
-            user.password = "";
-            return user;
+            
+            return new User()
+            {
+                name=user.name,
+                surname=user.surname,
+                email=user.email,
+                token=user.token
+            };
         }
 
         public Task SignUp(User user)
