@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.11.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Auth\" />
+  </ItemGroup>
 </Project>

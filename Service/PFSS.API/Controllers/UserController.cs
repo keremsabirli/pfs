@@ -24,7 +24,7 @@ namespace PFSS.API.Controllers
         {
             var user = new User()
             {
-                Name = model.Name
+                name = model.Name
             };
             await serviceWrapper.User.Add(user);
             return Ok();

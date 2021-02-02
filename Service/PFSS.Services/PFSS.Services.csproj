@@ -8,10 +8,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.5" />
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.11.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PFSS.Models\PFSS.Models.csproj" />
+    <ProjectReference Include="..\PFSS.Helpers\PFSS.Helpers.csproj" />
   </ItemGroup>
 
 </Project>
