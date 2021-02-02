@@ -1,4 +1,8 @@
-﻿using PFSS.API.RequestModels.Directory;
+﻿using AutoMapper;
+using PFSS.API.RequestModels.Container;
+using PFSS.API.RequestModels.Directory;
+using PFSS.API.RequestModels.User;
+using PFSS.Models;
 using PFSS.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,20 +11,27 @@ using System.Threading.Tasks;
 
 namespace PFSS.API.Config
 {
-    public class MapperConfig : AutoMapper.Profile
+    public class MapperConfig : Profile
     {
         public MapperConfig()
         {
-            MapRequestModels();
-            MapViewModels();
+            CreateViewModelMaps();
+            CreateRequestModelMaps();
         }
-        public void MapRequestModels()
+        public void CreateViewModelMaps()
         {
-            CreateMap<CreateDirectoryRequestModel, Models.Directory>();
+            CreateMap<Container, ContainerViewModel>().ReverseMap();
+            CreateMap<Directory, DirectoryViewModel>().ReverseMap();
+            CreateMap<File, FileViewModel>().ReverseMap();
         }
-        public void MapViewModels()
+        public void CreateRequestModelMaps()
         {
-            CreateMap<Models.Directory, DirectoryViewModel>();
+            CreateMap<Container, CreateContainerRequestModel>();
+
+            CreateMap<Directory, CreateDirectoryRequestModel>();
+            CreateMap<Directory, GetDirectoryChildsRequestModel>();
+
+            CreateMap<User, CreateUserRequestModel>();
         }
     }
 }

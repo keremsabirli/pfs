@@ -20,6 +20,7 @@ namespace PFSS.API.Controllers
         public PFSController(ServiceWrapper serviceWrapper, IMapper mapper)
         {
             this.serviceWrapper = serviceWrapper;
+            this.mapper = mapper;
             PFSUser = serviceWrapper.User.GetById("e14035fc-965f-47eb-b625-d63f1f574e7c").Result;
         }
     }

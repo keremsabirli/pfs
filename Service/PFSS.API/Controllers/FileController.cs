@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
 using PFSS.API.Controllers;
 using PFSS.Models;
 using PFSS.Services.Wrapper;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

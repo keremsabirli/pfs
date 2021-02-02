@@ -18,13 +18,7 @@ namespace PFSS.API.Controllers
         public UserController(ServiceWrapper serviceWrapper, IMapper mapper) : base(serviceWrapper, mapper)
         {
         }
-
-        [HttpGet("UserData")]
-        public async Task<ActionResult> GetUserData()
-        {
-            serviceWrapper.Directory.GetAll();
-            return Ok();
-        }
+        
         [HttpPost("Create")]
         public async Task<ActionResult> CreateUser(CreateUserRequestModel model)
         {
