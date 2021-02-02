@@ -5,7 +5,7 @@ namespace PFSS.Helpers
 {
     public static class ValidationHelper
     {
-        public static bool isValidEmail(this string email)
+        public static bool IsValidEmail(this string email)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace PFSS.Helpers
         }
 
 
-        public static bool isValidCharRange(this string text,int min, int max)
+        public static bool IsValidCharRange(this string text,int min, int max)
         {
             return text != null && text.Length >= min && text.Length <= max;
         }
@@ -30,7 +30,7 @@ namespace PFSS.Helpers
         }
 
 
-        public static bool isIn<T>(this T check,List<T> arr)
+        public static bool IsIn<T>(this T check,List<T> arr)
         {
 
             foreach(T value in arr)
@@ -40,7 +40,7 @@ namespace PFSS.Helpers
             }
             return false;
         }
-        public static bool not(this bool value)
+        public static bool Not(this bool value)
         {
             return !value;
         }

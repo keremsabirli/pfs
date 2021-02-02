@@ -24,7 +24,7 @@ namespace PFSS.Services
 
         public async Task<User> Login(LoginParams loginParams)
         {
-            var result = await this.GetByCondition(user=>user.email == loginParams.email && user.password == SecurityHelper.computeHash(loginParams.password));
+            var result = await this.GetByCondition(user=>user.Email == loginParams.Email && user.Password == SecurityHelper.computeHash(loginParams.Password));
             if(result==null && result.Count < 1)
             {
                 return null;
@@ -33,7 +33,7 @@ namespace PFSS.Services
 
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email, user.email),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
 
@@ -48,21 +48,21 @@ namespace PFSS.Services
                    claims: authClaims,
                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                    );
-            user.token = new JwtSecurityTokenHandler().WriteToken(token);
+            user.Token = new JwtSecurityTokenHandler().WriteToken(token);
 
             
             return new User()
             {
-                name=user.name,
-                surname=user.surname,
-                email=user.email,
-                token=user.token
+                Name=user.Name,
+                Surname=user.Surname,
+                Email=user.Email,
+                Token=user.Token
             };
         }
 
         public Task SignUp(User user)
         {
-            user.password = SecurityHelper.computeHash(user.password);
+            user.Password = SecurityHelper.computeHash(user.Password);
             return this.Add(user);
         }
     }
