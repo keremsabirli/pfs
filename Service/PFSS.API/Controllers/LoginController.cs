@@ -42,7 +42,7 @@ namespace PFSS.API.Controllers
             {
                 return Ok(new ResponseModel()
                 {
-                   status=ResponseType.BussinesError,
+                   Status=ResponseType.BussinesError,
                    UserMessage="Username or password is not valid"
                 });
             }
@@ -50,8 +50,8 @@ namespace PFSS.API.Controllers
             {
                 return Ok(new ResponseModel()
                 {
-                    status = ResponseType.Success,
-                    data = result
+                    Status = ResponseType.Success,
+                    Data = result
                 });
             }
         }
@@ -74,15 +74,15 @@ namespace PFSS.API.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterModel user)
         {
             string userMessage = "";
-            if (!user.email.isValidEmail())
+            if (!user.Email.IsValidEmail())
             {
                 userMessage = "Email is not valid.";
             }
-            else if (!user.password.isValidCharRange(6, 12))
+            else if (!user.Password.IsValidCharRange(6, 12))
             {
                 userMessage = "Password must be between 6 and 12 characters.";
             }
-            else if (!user.userType.isIn(new List<UserType> {
+            else if (!user.UserType.IsIn(new List<UserType> {
                 UserType.Admin,
                 UserType.Guest,
                 UserType.Standard
@@ -90,7 +90,7 @@ namespace PFSS.API.Controllers
             {
                 userMessage = "User Type is not valid";
             }
-            else if ((await this.serviceWrapper.User.GetByCondition(a => a.email == user.email))?.Count > 0)
+            else if ((await this.serviceWrapper.User.GetByCondition(a => a.Email == user.Email))?.Count > 0)
             {
                 userMessage = "This email is already registered.";
             }
@@ -101,23 +101,23 @@ namespace PFSS.API.Controllers
             {
                 return Ok(new ResponseModel()
                 {
-                    status=ResponseType.BussinesError,
+                    Status=ResponseType.BussinesError,
                     UserMessage=userMessage
                 });
             }
             var userModel = new User()
             {
-                name = user.name,
-                surname = user.surname,
-                email = user.email,
-                password = user.password,
-                userType = user.userType
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Password = user.Password,
+                UserType = user.UserType
             };
              await this.serviceWrapper.LoginService.SignUp(userModel);
 
             return Ok(new ResponseModel()
             {
-                status=ResponseType.Success
+                Status=ResponseType.Success
             });
         }
 
