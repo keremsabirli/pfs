@@ -14,14 +14,14 @@ using PFSS.Models.Auth;
 
 namespace PFSS.API.Controllers
 {
-    [Route("api/Auth")]
-    public class LoginController : Controller
+    [Route("api/[controller]")]
+    public class AuthController : Controller
     {
 
         protected readonly ServiceWrapper serviceWrapper;
         protected readonly IMapper mapper;
 
-        public LoginController(ServiceWrapper serviceWrapper,IMapper mapper)
+        public AuthController(ServiceWrapper serviceWrapper,IMapper mapper)
         {
             this.serviceWrapper = serviceWrapper;
         }
