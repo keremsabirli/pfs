@@ -12,7 +12,7 @@ namespace PFSS.Models
         /// </summary>
         public string CreatorId { get; set; }
         public string ParentDirectoryId { get; set; }
-        public User Creator { get; set; }
-        public Directory ParentDirectory { get; set; }
+        public List<Directory> ChildDirectories { get; set; }
+        public List<string> ChildFileIds { get; set; }
     }
 }

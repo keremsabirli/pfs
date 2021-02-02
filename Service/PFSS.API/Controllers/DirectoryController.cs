@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PFSS.API.RequestModels.Directory;
 using PFSS.Models;
 using PFSS.Services.Wrapper;
+using PFSS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,18 +23,14 @@ namespace PFSS.API.Controllers
         [HttpGet]
         public async Task<ActionResult> GetDirectoryChilds(GetDirectoryChildsRequestModel model)
         {
-            var directoryChilds = await serviceWrapper.Directory.GetByCondition(x => x.Id == model.ParentDirectoryId);
+            var directoryChilds = (await serviceWrapper.Directory.GetByCondition(x => x.Id == model.ParentDirectoryId)).ToList();
+            mapper.Map<List<DirectoryViewModel>>(directoryChilds);
             return Ok(directoryChilds);
         }
         [HttpPost("Create")]
         public async Task<ActionResult> CreateDirectory(CreateDirectoryRequestModel model)
         {
-            Directory directory = new Directory()
-            {
-                Creator = PFSUser,
-                ParentDirectory = await serviceWrapper.Directory.GetById(model.ParentDirectoryId),
-                Name = model.Name
-            };
+            var directory = mapper.Map<Directory>(model);
             await serviceWrapper.Directory.Add(directory);
             return Ok();
         }

@@ -72,12 +72,6 @@ namespace PrivateFileStorageService
                 swagger.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "PFSS.API.xml"));
 
             });
-            var mapperConfig = new MapperConfiguration(config =>
-            {
-                config.AddProfile(new MapperConfig());
-            });
-            var mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
             services.AddAutoMapper(typeof(Startup));
 
             services.AddAuthentication(options =>

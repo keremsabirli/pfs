@@ -38,7 +38,7 @@ namespace PFSS.Services
         }
         public async virtual Task Update(T entity)
         {
-            await collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+            await collection.ReplaceOneAsync(x => x.Id == entity.Id, entity, new ReplaceOptions());
         }
         public async virtual Task UpdateAndGet(T entity)
         {
