@@ -10,20 +10,18 @@ using PFSS.Models;
 using PFSS.Services.Wrapper;
 using PFSS.Helpers;
 using PFSS.Models.Auth;
+using PFSS.ViewModels;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PFSS.API.Controllers
 {
     [Route("api/Auth")]
-    public class LoginController : Controller
+    public class AuthController : PFSController
     {
 
-        protected readonly ServiceWrapper serviceWrapper;
-        protected readonly IMapper mapper;
-
-        public LoginController(ServiceWrapper serviceWrapper,IMapper mapper)
+        public AuthController(ServiceWrapper serviceWrapper,IMapper mapper) : base(serviceWrapper, mapper)
         {
-            this.serviceWrapper = serviceWrapper;
+
         }
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace PFSS.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginParams loginParams)
         {
-            var result= await this.serviceWrapper.LoginService.Login(loginParams);
+            var result = mapper.Map<LoginViewModel>(await this.serviceWrapper.LoginService.Login(loginParams));
 
             if (result == null)
             {

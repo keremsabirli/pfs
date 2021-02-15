@@ -21,8 +21,12 @@ namespace PFSS.API.Config
         public void CreateViewModelMaps()
         {
             CreateMap<Container, ContainerViewModel>().ReverseMap();
+
             CreateMap<Directory, DirectoryViewModel>().ReverseMap();
+
             CreateMap<File, FileViewModel>().ReverseMap();
+
+            CreateMap<User, LoginViewModel>().ReverseMap();
         }
         public void CreateRequestModelMaps()
         {
