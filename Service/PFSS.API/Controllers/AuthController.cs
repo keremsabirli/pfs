@@ -38,15 +38,15 @@ namespace PFSS.API.Controllers
 
             if (result == null)
             {
-                return Ok(new ResponseModel()
+                return Ok(new ResponseModel<LoginViewModel>()
                 {
-                   Status=ResponseType.BussinesError,
+                   Status=ResponseType.BussinessError,
                    UserMessage="Username or password is not valid"
                 });
             }
             else
             {
-                return Ok(new ResponseModel()
+                return Ok(new ResponseModel<LoginViewModel>()
                 {
                     Status = ResponseType.Success,
                     Data = result
@@ -97,9 +97,9 @@ namespace PFSS.API.Controllers
 
             if (!userMessage.IsNullOrEmpty())
             {
-                return Ok(new ResponseModel()
+                return Ok(new ResponseModel<Object>()
                 {
-                    Status=ResponseType.BussinesError,
+                    Status=ResponseType.BussinessError,
                     UserMessage=userMessage
                 });
             }
@@ -113,7 +113,7 @@ namespace PFSS.API.Controllers
             };
              await this.serviceWrapper.LoginService.SignUp(userModel);
 
-            return Ok(new ResponseModel()
+            return Ok(new ResponseModel<Object>()
             {
                 Status=ResponseType.Success
             });
