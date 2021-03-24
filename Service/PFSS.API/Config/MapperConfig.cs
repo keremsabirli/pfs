@@ -20,7 +20,6 @@ namespace PFSS.API.Config
         }
         public void CreateViewModelMaps()
         {
-            CreateMap<Container, ContainerViewModel>().ReverseMap();
 
             CreateMap<Directory, DirectoryViewModel>().ReverseMap();
 
@@ -30,12 +29,11 @@ namespace PFSS.API.Config
         }
         public void CreateRequestModelMaps()
         {
-            CreateMap<Container, CreateContainerRequestModel>();
 
-            CreateMap<Directory, CreateDirectoryRequestModel>();
-            CreateMap<Directory, GetDirectoryChildsRequestModel>();
+            CreateMap<Directory, CreateDirectoryRequestModel>().ReverseMap();
+            CreateMap<Directory, GetDirectoryChildsRequestModel>().ReverseMap();
 
-            CreateMap<User, CreateUserRequestModel>();
+            CreateMap<User, CreateUserRequestModel>().ReverseMap();
         }
     }
 }

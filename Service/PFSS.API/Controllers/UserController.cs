@@ -18,16 +18,11 @@ namespace PFSS.API.Controllers
         public UserController(ServiceWrapper serviceWrapper, IMapper mapper) : base(serviceWrapper, mapper)
         {
         }
-        
-        [HttpPost("Create")]
-        public async Task<ActionResult> CreateUser(CreateUserRequestModel model)
+        [HttpGet]
+        public async Task<ActionResult> GetInitialInfo()
         {
-            var user = new User()
-            {
-                Name = model.Name
-            };
-            await serviceWrapper.User.Add(user);
-            return Ok();
+            var directories = await serviceWrapper.Directory.GetByCondition(x => PFSUser.AuthorizedDirectories.Contains(x.Id));
+            return Ok(directories);
         }
     }
 }

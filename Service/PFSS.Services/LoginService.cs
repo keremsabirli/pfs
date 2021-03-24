@@ -49,7 +49,7 @@ namespace PFSS.Services
                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                    );
             user.Token = new JwtSecurityTokenHandler().WriteToken(token);
-
+            await Update(user);
             
             return new User()
             {
