@@ -4,10 +4,10 @@ using System.Text;
 
 namespace PFSS.Models
 {
-    public class Container : Shared
+    public class DirectoryTree
     {
+        public string DirectoryId { get; set; }
         public string Name { get; set; }
-        public string CreatorId { get; set; }
-        public List<Directory> Directories { get; set; }
+        public List<DirectoryTree> Childs { get; set; }
     }
 }

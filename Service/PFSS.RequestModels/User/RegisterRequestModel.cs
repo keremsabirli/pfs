@@ -1,7 +1,13 @@
-﻿using System;
-namespace PFSS.Models.Auth
+﻿using PFSS.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PFSS.RequestModels.User
 {
-    public class RegisterModel
+    public class RegisterRequestModel
     {
         public string Name { get; set; }
         public string Surname { get; set; }

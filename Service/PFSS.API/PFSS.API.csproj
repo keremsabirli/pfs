@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PFSS.Managers\PFSS.Managers.csproj" />
     <ProjectReference Include="..\PFSS.Services\PFSS.Services.csproj" />
-    <ProjectReference Include="..\PFSS.ViewModels\PFSS.ViewModels.csproj" />
     <ProjectReference Include="..\PFSS.Models\PFSS.Models.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="RequestModels\File\" />
+    <Folder Include="RequestModels\User\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
+using System.Collections.Generic;
 
 namespace PFSS.Models
 { 
@@ -14,6 +15,7 @@ namespace PFSS.Models
         public string Password { get; set; }
         public UserType UserType { get; set; }
         public string Token { get; set; }
+        public List<string> AuthorizedDirectories { get; set; }
     }
 
     public enum UserType:byte { 
