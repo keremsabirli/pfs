@@ -8,7 +8,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using PFSS.Models.Auth;
+using PFSS.RequestModels.User;
 
 namespace PFSS.Services
 {
@@ -22,7 +22,7 @@ namespace PFSS.Services
             _jwtSettings = (JwtSettings)jwtSettings;
         }
 
-        public async Task<User> Login(LoginParams loginParams)
+        public async Task<User> Login(LoginRequestModel loginParams)
         {
             var result = await this.GetByCondition(user=>user.Email == loginParams.Email && user.Password == SecurityHelper.computeHash(loginParams.Password));
             if(result==null && result.Count < 1)

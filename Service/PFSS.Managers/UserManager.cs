@@ -1,7 +1,4 @@
 ﻿using PFSS.Services.Wrapper;
-using PFSS.ViewModels;
-using System;
-using System.Threading.Tasks;
 
 namespace PFSS.Managers
 {
@@ -10,7 +7,5 @@ namespace PFSS.Managers
         public UserManager(ServiceWrapper serviceWrapper) : base(serviceWrapper)
         {
         }
-
-        
     }
 }

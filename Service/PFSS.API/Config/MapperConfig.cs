@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using PFSS.API.RequestModels.Container;
 using PFSS.API.RequestModels.Directory;
-using PFSS.API.RequestModels.User;
 using PFSS.Models;
-using PFSS.ViewModels;
+using PFSS.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +30,6 @@ namespace PFSS.API.Config
 
             CreateMap<Directory, CreateDirectoryRequestModel>().ReverseMap();
             CreateMap<Directory, GetDirectoryChildsRequestModel>().ReverseMap();
-
-            CreateMap<User, CreateUserRequestModel>().ReverseMap();
         }
     }
 }

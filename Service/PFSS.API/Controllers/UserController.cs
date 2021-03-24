@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PFSS.API.RequestModels.User;
 using PFSS.Models;
 using PFSS.Services.Wrapper;
 using System;

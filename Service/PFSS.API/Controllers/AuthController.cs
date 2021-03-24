@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using PFSS.Models;
 using PFSS.Services.Wrapper;
 using PFSS.Helpers;
-using PFSS.Models.Auth;
-using PFSS.ViewModels;
+using PFSS.RequestModels.User;
+using PFSS.Models.ViewModels;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PFSS.API.Controllers
@@ -32,7 +32,7 @@ namespace PFSS.API.Controllers
         [Route("Login")]
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginParams loginParams)
+        public async Task<IActionResult> Login([FromBody] LoginRequestModel loginParams)
         {
             var result = mapper.Map<LoginViewModel>(await this.serviceWrapper.LoginService.Login(loginParams));
 
@@ -69,7 +69,7 @@ namespace PFSS.API.Controllers
         [Route("Register")]
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterModel user)
+        public async Task<IActionResult> Register([FromBody] RegisterRequestModel user)
         {
             string userMessage = "";
             if (!user.Email.IsValidEmail())

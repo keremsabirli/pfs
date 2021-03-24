@@ -10,6 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Auth\" />
+    <Folder Include="RequestModels\File\" />
   </ItemGroup>
 </Project>
