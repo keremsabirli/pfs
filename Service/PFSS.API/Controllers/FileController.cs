@@ -15,7 +15,7 @@ namespace PrivateFileStorageService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FileController : PFSController
+    public class FileController : PFSAuthenticatedController
     {
         public FileController(ServiceWrapper serviceWrapper, IMapper mapper): base(serviceWrapper, mapper)
         {

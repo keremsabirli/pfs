@@ -14,7 +14,7 @@ namespace PFSS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DirectoryController : PFSController
+    public class DirectoryController : PFSAuthenticatedController
     {
         public DirectoryController(ServiceWrapper serviceWrapper, IMapper mapper) : base(serviceWrapper, mapper)
         {

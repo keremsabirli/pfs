@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PFSS.Models;
+using PFSS.Models.ViewModels;
 using PFSS.Services.Wrapper;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace PFSS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : PFSController
+    public class UserController : PFSAuthenticatedController
     {
         public UserController(ServiceWrapper serviceWrapper, IMapper mapper) : base(serviceWrapper, mapper)
         {
@@ -21,7 +22,8 @@ namespace PFSS.API.Controllers
         public async Task<ActionResult> GetInitialInfo()
         {
             var directories = await serviceWrapper.Directory.GetByCondition(x => PFSUser.AuthorizedDirectories.Contains(x.Id));
-            return Ok(directories);
+            var vm = mapper.Map<List<DirectoryViewModel>>(directories);
+            return Ok(vm);
         }
     }
 }
